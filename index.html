@@ -1,3 +1,6 @@
+
+
+Safeyourstep index · HTML
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -6,17 +9,17 @@
 <title>SafeYourStep — Langkah Aman Mengatur Keuanganmu</title>
 <meta name="description" content="SafeYourStep membantu kamu mengatur keuangan pribadi lewat Smart Financial Dashboard, WA Bot, dan Channel WA.">
 <meta name="theme-color" content="#0E2B26">
-
+ 
 <!-- Favicon (dibuat langsung dari kode, tanpa file gambar terpisah) -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230E2B26'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23C9A227'/%3E%3C/svg%3E">
-
+ 
 <!-- Open Graph / pratinjau saat link dibagikan ke WhatsApp, Instagram, dll -->
 <meta property="og:title" content="SafeYourStep — Langkah Aman Mengatur Keuanganmu">
 <meta property="og:description" content="Smart Financial Dashboard, WA Bot, dan Channel WA untuk membantu kamu mengatur keuangan pribadi.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="id_ID">
 <meta name="twitter:card" content="summary">
-
+ 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -65,7 +68,7 @@
     font-weight:600;
     display:flex;align-items:center;gap:10px;
   }
-  .eyebrow::before{content:"";width:22px;height:1px;background:var(--brass);}
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--brass);position:relative;top:2px;}
   button, .btn{
     font-family:'Inter',sans-serif;
     font-weight:600;
@@ -91,7 +94,7 @@
   .btn-dark:hover{transform:translateY(-2px);background:var(--ink-2);}
   .btn-outline{background:transparent;color:var(--ink);border-color:var(--ink);}
   .btn-outline:hover{background:var(--ink);color:var(--paper);}
-
+ 
   /* NAV */
   header{
     position:sticky;top:0;z-index:50;
@@ -118,7 +121,7 @@
     .nav-links,.nav-cta{display:none;}
     .nav-toggle{display:block;}
   }
-
+ 
   /* HERO */
   .hero{
     background:var(--ink);
@@ -142,12 +145,12 @@
     font-size:17.5px;color:#C9D3CC;max-width:480px;margin-top:20px;
   }
   .hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
-
+ 
   /* staircase signature */
-  .stairs{position:relative;height:420px;}
+  .stairs{position:relative;height:420px;overflow:hidden;}
   .step{
     position:absolute;
-    width:250px;
+    width:min(230px, 46%);
     background:var(--ink-2);
     border:1px solid rgba(251,250,244,.12);
     border-radius:12px;
@@ -155,6 +158,7 @@
     opacity:0;
     transform:translateY(24px);
     transition:opacity .6s ease, transform .6s ease;
+    box-sizing:border-box;
   }
   .step.on{opacity:1;transform:translateY(0);}
   .step .num{
@@ -162,20 +166,20 @@
   }
   .step .lbl{font-size:14.5px;color:var(--paper);margin-top:4px;font-weight:600;}
   .step1{left:0;top:300px;}
-  .step2{left:110px;top:210px;}
-  .step3{left:220px;top:120px;}
-  .step4{left:330px;top:30px;}
+  .step2{left:18%;top:210px;}
+  .step3{left:36%;top:120px;}
+  .step4{right:0;top:30px;}
   @media(max-width:960px){
-    .stairs{height:auto;display:flex;flex-direction:column;gap:12px;margin-top:8px;}
+    .stairs{height:auto;display:flex;flex-direction:column;gap:12px;margin-top:8px;overflow:visible;}
     .step{position:static;width:100%;opacity:1;transform:none;}
   }
-  @media(max-width:500px){.step4,.step3{left:0;}}
-
+  @media(max-width:500px){.step4,.step3{left:0;right:auto;}}
+ 
   section{padding:96px 0;}
   .section-head{max-width:640px;margin-bottom:52px;}
   .section-head h2{font-size:clamp(26px,3.4vw,38px);font-weight:600;margin-top:14px;line-height:1.18;}
   .section-head p{color:var(--gray-text);margin-top:14px;font-size:16px;}
-
+ 
   /* pillars (5 metrics) */
   .pillars{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
   @media(max-width:960px){.pillars{grid-template-columns:repeat(2,1fr);}}
@@ -187,7 +191,7 @@
   .pillar .pnum{font-family:'IBM Plex Mono',monospace;color:var(--moss);font-size:13px;font-weight:600;}
   .pillar h3{font-size:17px;margin-top:10px;font-weight:600;}
   .pillar p{font-size:14px;color:var(--gray-text);margin-top:8px;}
-
+ 
   /* 4 steps process */
   .process{counter-reset:step;}
   .p-row{
@@ -200,7 +204,7 @@
   }
   .p-row h3{font-size:19px;font-weight:600;}
   .p-row p{color:var(--gray-text);margin-top:8px;font-size:15px;max-width:560px;}
-
+ 
   /* products */
   .products{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
   @media(max-width:960px){.products{grid-template-columns:1fr;}}
@@ -223,7 +227,7 @@
   .feat-list{list-style:none;padding:0;margin:0;font-size:14px;color:var(--ink-2);}
   .feat-list li{padding:6px 0;border-top:1px solid var(--line);display:flex;gap:8px;}
   .feat-list li::before{content:"—";color:var(--brass);flex-shrink:0;}
-
+ 
   /* dashboard mock preview */
   .dash-preview{
     background:var(--ink);border-radius:20px;padding:40px;color:var(--paper);
@@ -236,14 +240,14 @@
   .dash-card .dlabel{font-size:12px;color:#9FB3A9;font-family:'IBM Plex Mono',monospace;}
   .dash-card .dval{font-family:'IBM Plex Mono',monospace;font-size:21px;font-weight:600;color:var(--brass);margin-top:8px;}
   .dash-card .dsub{font-size:12px;color:#B9C8BF;margin-top:4px;}
-
+ 
   /* who its for */
   .personas{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
   @media(max-width:860px){.personas{grid-template-columns:1fr;}}
   .persona{border-left:2px solid var(--brass);padding-left:18px;}
   .persona h3{font-size:16.5px;font-weight:600;}
   .persona p{font-size:14.5px;color:var(--gray-text);margin-top:6px;}
-
+ 
   /* dark cta */
   .cta-band{
     background:var(--moss);color:var(--paper);border-radius:24px;
@@ -252,7 +256,7 @@
   .cta-band h2{color:var(--paper);font-size:clamp(24px,3vw,32px);max-width:480px;}
   .cta-band p{color:#DDEBE1;margin-top:10px;max-width:460px;font-size:15px;}
   .cta-actions{display:flex;gap:12px;flex-wrap:wrap;}
-
+ 
   footer{background:var(--ink);color:#B9C8BF;padding:64px 0 32px;}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;}
   @media(max-width:800px){.foot-grid{grid-template-columns:1fr 1fr;}}
@@ -264,7 +268,7 @@
     border-top:1px solid rgba(251,250,244,.12);margin-top:48px;padding-top:24px;
     display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#7E9188;
   }
-
+ 
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
   .reveal.on{opacity:1;transform:translateY(0);}
   @media (prefers-reduced-motion: reduce){
@@ -273,7 +277,7 @@
 </style>
 </head>
 <body>
-
+ 
 <header>
   <nav>
     <div class="logo"><span class="dot"></span>SafeYourStep</div>
@@ -290,7 +294,7 @@
     <button class="nav-toggle" aria-label="Buka menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#123832" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
   </nav>
 </header>
-
+ 
 <section class="hero">
   <div class="wrap">
     <div>
@@ -310,7 +314,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section id="pilar">
   <div class="wrap">
     <div class="section-head reveal">
@@ -327,7 +331,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section id="langkah" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
   <div class="wrap">
     <div class="section-head reveal">
@@ -354,7 +358,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section id="produk">
   <div class="wrap">
     <div class="section-head reveal">
@@ -372,7 +376,7 @@
           <li>Pilih bulan lewat dropdown, seluruh dashboard ikut berubah</li>
           <li>Target & bobot skor bisa disesuaikan sendiri</li>
         </ul>
-        <a class="btn btn-primary" href="#" style="justify-content:center;">Dapatkan Worksheet-nya</a>
+        <a class="btn btn-primary" href="https://1drv.ms/x/c/c0db7c51366b00f6/IQCywKZJU7ZKTb83opfANkcwAdFYYJzMWRx_iPrf2wi0dcU?e=Ni72TS" target="_blank" rel="noopener" style="justify-content:center;">Dapatkan Worksheet-nya</a>
       </div>
       <div class="product-card reveal">
         <div class="p-icon">💬</div>
@@ -383,7 +387,7 @@
           <li>Hitung cepat rasio utang & dana darurat</li>
           <li>Bisa diajak tanya jawab dasar soal keuangan</li>
         </ul>
-        <a class="btn btn-outline" href="https://wa.me/62XXXXXXXXXX" style="justify-content:center;">Chat WA Bot →</a>
+        <a class="btn btn-outline" href="https://wa.me/6281331906802" style="justify-content:center;" target="_blank" rel="noopener">Chat WA Bot →</a>
       </div>
       <div class="product-card reveal">
         <div class="p-icon">📣</div>
@@ -394,12 +398,12 @@
           <li>Update rutin, tidak spam</li>
           <li>Gratis untuk diikuti siapa saja</li>
         </ul>
-        <a class="btn btn-outline" href="https://whatsapp.com/channel/XXXXXXXXXXXXXXXXXXXX" style="justify-content:center;">Gabung Channel →</a>
+        <a class="btn btn-outline" href="https://whatsapp.com/channel/0029VbDEJ7y05MUoMiRb9t3A" style="justify-content:center;" target="_blank" rel="noopener">Gabung Channel →</a>
       </div>
     </div>
   </div>
 </section>
-
+ 
 <section style="background:var(--parchment);">
   <div class="wrap">
     <div class="section-head reveal">
@@ -419,7 +423,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section style="background:var(--paper);border-top:1px solid var(--line);">
   <div class="wrap">
     <div class="section-head reveal">
@@ -433,7 +437,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section id="komunitas">
   <div class="wrap">
     <div class="cta-band reveal">
@@ -442,13 +446,13 @@
         <p>Gabung Channel WA untuk update rutin, atau langsung chat WA Bot untuk bantuan cepat soal keuanganmu.</p>
       </div>
       <div class="cta-actions">
-        <a class="btn" style="background:var(--ink);color:var(--paper);" href="https://whatsapp.com/channel/XXXXXXXXXXXXXXXXXXXX">Gabung Channel WA</a>
-        <a class="btn" style="background:var(--paper);color:var(--ink);" href="https://wa.me/62XXXXXXXXXX">Chat WA Bot</a>
+        <a class="btn" style="background:var(--ink);color:var(--paper);" href="https://whatsapp.com/channel/0029VbDEJ7y05MUoMiRb9t3A" target="_blank" rel="noopener">Gabung Channel WA</a>
+        <a class="btn" style="background:var(--paper);color:var(--ink);" href="https://wa.me/6281331906802" target="_blank" rel="noopener">Chat WA Bot</a>
       </div>
     </div>
   </div>
 </section>
-
+ 
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -468,15 +472,13 @@
         <h4>Produk</h4>
         <ul>
           <li><a href="#produk">Smart Financial Dashboard</a></li>
-          <li><a href="https://wa.me/62XXXXXXXXXX">WA Bot</a></li>
-          <li><a href="https://whatsapp.com/channel/XXXXXXXXXXXXXXXXXXXX">Channel WA</a></li>
+          <li><a href="https://wa.me/6281331906802" target="_blank" rel="noopener">WA Bot</a></li>
+          <li><a href="https://whatsapp.com/channel/0029VbDEJ7y05MUoMiRb9t3A" target="_blank" rel="noopener">Channel WA</a></li>
         </ul>
       </div>
       <div>
         <h4>Kontak</h4>
         <ul>
-          <li>hello@safeyourstep.id</li>
-          <li>WA: +62 XXX-XXXX-XXXX</li>
         </ul>
       </div>
     </div>
@@ -486,7 +488,7 @@
     </div>
   </div>
 </footer>
-
+ 
 <script>
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); } });
@@ -495,3 +497,6 @@
 </script>
 </body>
 </html>
+ 
+
+
