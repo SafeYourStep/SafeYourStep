@@ -116,6 +116,13 @@
   .nav-links a:hover::after{width:100%;}
   .nav-cta{display:flex;gap:12px;}
   .nav-toggle{display:none;background:none;border:none;padding:6px;}
+  .mobile-menu{display:none;flex-direction:column;gap:4px;padding:8px 32px 20px;background:var(--parchment);border-top:1px solid var(--line);}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{
+    padding:12px 4px;font-size:15px;font-weight:500;color:var(--ink-2);
+    border-bottom:1px solid var(--line);
+  }
+  .mobile-menu .btn{justify-content:center;margin-top:8px;}
   @media(max-width:860px){
     .nav-links,.nav-cta{display:none;}
     .nav-toggle{display:block;}
@@ -290,8 +297,16 @@
       <a class="btn btn-outline" href="#produk" style="padding:10px 20px;font-size:14px;">Lihat Produk</a>
       <a class="btn btn-dark" href="#komunitas" style="padding:10px 20px;font-size:14px;">Gabung WA</a>
     </div>
-    <button class="nav-toggle" aria-label="Buka menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#123832" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#123832" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
   </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#pilar">Pengenalan</a>
+    <a href="#langkah">Cara Kerja</a>
+    <a href="#produk">Produk</a>
+    <a href="#komunitas">Komunitas</a>
+    <a class="btn btn-outline" href="#produk">Lihat Produk</a>
+    <a class="btn btn-dark" href="#komunitas">Gabung WA</a>
+  </div>
 </header>
  
 <section class="hero">
@@ -489,6 +504,19 @@
 </footer>
  
 <script>
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+ 
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); } });
   },{threshold:0.15});
@@ -497,3 +525,5 @@
 </body>
 </html>
  
+
+
