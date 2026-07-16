@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafeYourStep — Langkah Aman Mengatur Keuanganmu</title>
+<meta name="description" content="SafeYourStep membantu kamu mengatur keuangan pribadi lewat Smart Financial Dashboard, WA Bot, dan Channel WA.">
+<meta name="theme-color" content="#0E2B26">
+
+<!-- Favicon (dibuat langsung dari kode, tanpa file gambar terpisah) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230E2B26'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23C9A227'/%3E%3C/svg%3E">
+
+<!-- Open Graph / pratinjau saat link dibagikan ke WhatsApp, Instagram, dll -->
+<meta property="og:title" content="SafeYourStep — Langkah Aman Mengatur Keuanganmu">
+<meta property="og:description" content="Smart Financial Dashboard, WA Bot, dan Channel WA untuk membantu kamu mengatur keuangan pribadi.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E2B26;
+    --ink-2:#123832;
+    --moss:#2F6F4E;
+    --moss-light:#DCEBE0;
+    --brass:#C9A227;
+    --brass-light:#F3E6BE;
+    --parchment:#EFF1E7;
+    --paper:#FBFAF4;
+    --charcoal:#1B1E1A;
+    --gray-text:#5B6058;
+    --line:#DAD9C9;
+    --radius:14px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--parchment);
+    color:var(--charcoal);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    color:var(--ink);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--moss);
+    font-weight:600;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--brass);}
+  button, .btn{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    border-radius:999px;
+    padding:13px 26px;
+    border:1.5px solid transparent;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform .15s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn:focus-visible, a:focus-visible, button:focus-visible{
+    outline:3px solid var(--brass);
+    outline-offset:2px;
+  }
+  .btn-primary{background:var(--brass);color:var(--ink);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{background:transparent;color:var(--paper);border-color:rgba(251,250,244,.4);}
+  .btn-ghost:hover{border-color:var(--paper);transform:translateY(-2px);}
+  .btn-dark{background:var(--ink);color:var(--paper);}
+  .btn-dark:hover{transform:translateY(-2px);background:var(--ink-2);}
+  .btn-outline{background:transparent;color:var(--ink);border-color:var(--ink);}
+  .btn-outline:hover{background:var(--ink);color:var(--paper);}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(239,241,231,.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:var(--maxw);margin:0 auto;padding:16px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{
+    font-family:'Fraunces',serif;font-weight:600;font-size:21px;color:var(--ink);
+    display:flex;align-items:center;gap:8px;
+  }
+  .logo .dot{width:9px;height:9px;border-radius:50%;background:var(--brass);}
+  .nav-links{display:flex;gap:30px;font-size:14.5px;font-weight:500;color:var(--ink-2);}
+  .nav-links a{position:relative;padding:4px 0;}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--brass);transition:width .2s ease;}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{display:flex;gap:12px;}
+  .nav-toggle{display:none;background:none;border:none;padding:6px;}
+  @media(max-width:860px){
+    .nav-links,.nav-cta{display:none;}
+    .nav-toggle{display:block;}
+  }
+
+  /* HERO */
+  .hero{
+    background:var(--ink);
+    color:var(--paper);
+    padding:88px 0 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;
+  }
+  @media(max-width:960px){.hero .wrap{grid-template-columns:1fr;}}
+  .hero h1{
+    font-size:clamp(34px,5vw,54px);
+    line-height:1.08;
+    font-weight:600;
+    color:var(--paper);
+  }
+  .hero h1 em{font-style:italic;color:var(--brass);}
+  .hero p.lead{
+    font-size:17.5px;color:#C9D3CC;max-width:480px;margin-top:20px;
+  }
+  .hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+
+  /* staircase signature */
+  .stairs{position:relative;height:420px;}
+  .step{
+    position:absolute;
+    width:250px;
+    background:var(--ink-2);
+    border:1px solid rgba(251,250,244,.12);
+    border-radius:12px;
+    padding:16px 18px;
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .step.on{opacity:1;transform:translateY(0);}
+  .step .num{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--brass);font-weight:600;
+  }
+  .step .lbl{font-size:14.5px;color:var(--paper);margin-top:4px;font-weight:600;}
+  .step1{left:0;top:300px;}
+  .step2{left:110px;top:210px;}
+  .step3{left:220px;top:120px;}
+  .step4{left:330px;top:30px;}
+  @media(max-width:960px){
+    .stairs{height:auto;display:flex;flex-direction:column;gap:12px;margin-top:8px;}
+    .step{position:static;width:100%;opacity:1;transform:none;}
+  }
+  @media(max-width:500px){.step4,.step3{left:0;}}
+
+  section{padding:96px 0;}
+  .section-head{max-width:640px;margin-bottom:52px;}
+  .section-head h2{font-size:clamp(26px,3.4vw,38px);font-weight:600;margin-top:14px;line-height:1.18;}
+  .section-head p{color:var(--gray-text);margin-top:14px;font-size:16px;}
+
+  /* pillars (5 metrics) */
+  .pillars{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+  @media(max-width:960px){.pillars{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.pillars{grid-template-columns:1fr;}}
+  .pillar{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px 20px;
+  }
+  .pillar .pnum{font-family:'IBM Plex Mono',monospace;color:var(--moss);font-size:13px;font-weight:600;}
+  .pillar h3{font-size:17px;margin-top:10px;font-weight:600;}
+  .pillar p{font-size:14px;color:var(--gray-text);margin-top:8px;}
+
+  /* 4 steps process */
+  .process{counter-reset:step;}
+  .p-row{
+    display:grid;grid-template-columns:70px 1fr;gap:24px;
+    padding:26px 0;border-top:1px solid var(--line);
+  }
+  .process .p-row:last-child{border-bottom:1px solid var(--line);}
+  .p-row .pn{
+    font-family:'Fraunces',serif;font-size:32px;color:var(--brass);font-weight:600;
+  }
+  .p-row h3{font-size:19px;font-weight:600;}
+  .p-row p{color:var(--gray-text);margin-top:8px;font-size:15px;max-width:560px;}
+
+  /* products */
+  .products{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media(max-width:960px){.products{grid-template-columns:1fr;}}
+  .product-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;display:flex;flex-direction:column;gap:14px;
+  }
+  .product-card.featured{border:2px solid var(--brass);position:relative;}
+  .badge{
+    position:absolute;top:-13px;left:24px;background:var(--brass);color:var(--ink);
+    font-size:11.5px;font-weight:700;padding:4px 12px;border-radius:999px;
+    font-family:'IBM Plex Mono',monospace;letter-spacing:.04em;
+  }
+  .p-icon{
+    width:42px;height:42px;border-radius:10px;background:var(--moss-light);
+    display:flex;align-items:center;justify-content:center;color:var(--moss);font-weight:700;
+  }
+  .product-card h3{font-size:20px;font-weight:600;}
+  .product-card p.desc{color:var(--gray-text);font-size:14.5px;flex-grow:1;}
+  .feat-list{list-style:none;padding:0;margin:0;font-size:14px;color:var(--ink-2);}
+  .feat-list li{padding:6px 0;border-top:1px solid var(--line);display:flex;gap:8px;}
+  .feat-list li::before{content:"—";color:var(--brass);flex-shrink:0;}
+
+  /* dashboard mock preview */
+  .dash-preview{
+    background:var(--ink);border-radius:20px;padding:40px;color:var(--paper);
+  }
+  .dash-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:24px;}
+  @media(max-width:900px){.dash-grid{grid-template-columns:repeat(2,1fr);}}
+  .dash-card{
+    background:var(--ink-2);border-radius:10px;padding:16px;border:1px solid rgba(251,250,244,.1);
+  }
+  .dash-card .dlabel{font-size:12px;color:#9FB3A9;font-family:'IBM Plex Mono',monospace;}
+  .dash-card .dval{font-family:'IBM Plex Mono',monospace;font-size:21px;font-weight:600;color:var(--brass);margin-top:8px;}
+  .dash-card .dsub{font-size:12px;color:#B9C8BF;margin-top:4px;}
+
+  /* who its for */
+  .personas{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media(max-width:860px){.personas{grid-template-columns:1fr;}}
+  .persona{border-left:2px solid var(--brass);padding-left:18px;}
+  .persona h3{font-size:16.5px;font-weight:600;}
+  .persona p{font-size:14.5px;color:var(--gray-text);margin-top:6px;}
+
+  /* dark cta */
+  .cta-band{
+    background:var(--moss);color:var(--paper);border-radius:24px;
+    padding:60px 48px;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;
+  }
+  .cta-band h2{color:var(--paper);font-size:clamp(24px,3vw,32px);max-width:480px;}
+  .cta-band p{color:#DDEBE1;margin-top:10px;max-width:460px;font-size:15px;}
+  .cta-actions{display:flex;gap:12px;flex-wrap:wrap;}
+
+  footer{background:var(--ink);color:#B9C8BF;padding:64px 0 32px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;}
+  @media(max-width:800px){.foot-grid{grid-template-columns:1fr 1fr;}}
+  footer h4{color:var(--paper);font-size:14px;margin-bottom:14px;font-family:'Inter',sans-serif;font-weight:600;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer li{padding:6px 0;font-size:14px;}
+  footer li a:hover{color:var(--paper);}
+  .foot-bottom{
+    border-top:1px solid rgba(251,250,244,.12);margin-top:48px;padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#7E9188;
+  }
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.on{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal,.step{transition:none;opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><span class="dot"></span>SafeYourStep</div>
+    <div class="nav-links">
+      <a href="#pilar">Pengenalan</a>
+      <a href="#langkah">Cara Kerja</a>
+      <a href="#produk">Produk</a>
+      <a href="#komunitas">Komunitas</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-outline" href="#produk" style="padding:10px 20px;font-size:14px;">Lihat Produk</a>
+      <a class="btn btn-dark" href="#komunitas" style="padding:10px 20px;font-size:14px;">Gabung WA</a>
+    </div>
+    <button class="nav-toggle" aria-label="Buka menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#123832" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Edukasi & alat keuangan pribadi</p>
+      <h1>Setiap langkah keuangan yang <em>aman</em>, dimulai dari sini.</h1>
+      <p class="lead">SafeYourStep membantu kamu memahami dan mengatur keuangan pribadi lewat tiga hal: worksheet dashboard yang menghitung otomatis, bot WhatsApp yang siap membantu kapan saja, dan channel WA berisi bahasan keuangan yang mudah dicerna.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#produk">Lihat Smart Financial Dashboard</a>
+        <a class="btn btn-ghost" href="#komunitas">Gabung Channel WA →</a>
+      </div>
+    </div>
+    <div class="stairs" id="stairs">
+      <div class="step step1"><div class="num">01</div><div class="lbl">Kenali kondisi keuanganmu</div></div>
+      <div class="step step2"><div class="num">02</div><div class="lbl">Atur & pantau lewat dashboard</div></div>
+      <div class="step step3"><div class="num">03</div><div class="lbl">Tanya cepat lewat WA Bot</div></div>
+      <div class="step step4"><div class="num">04</div><div class="lbl">Belajar bareng di Channel WA</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="pilar">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Kenapa ini penting</p>
+      <h2>Kesehatan keuanganmu ditentukan oleh 5 hal ini.</h2>
+      <p>Sebelum bicara soal investasi atau target besar, cek dulu lima pilar dasar ini. Kelimanya juga yang otomatis dihitung di Smart Financial Dashboard.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar reveal"><div class="pnum">01</div><h3>Arus Kas</h3><p>Selisih antara uang masuk dan keluar tiap bulan. Kalau sering minus, di sinilah masalah biasanya mulai.</p></div>
+      <div class="pillar reveal"><div class="pnum">02</div><h3>Rasio Utang</h3><p>Perbandingan cicilan terhadap pendapatan. Aturan umum: jaga di bawah 36% agar tidak mencekik arus kas.</p></div>
+      <div class="pillar reveal"><div class="pnum">03</div><h3>Dana Darurat</h3><p>Berapa bulan pengeluaran wajibmu yang bisa ditutup tabungan kalau pendapatan berhenti tiba-tiba.</p></div>
+      <div class="pillar reveal"><div class="pnum">04</div><h3>Alokasi Anggaran</h3><p>Ke mana saja uangmu benar-benar pergi tiap bulan — bukan perkiraan, tapi angka sebenarnya.</p></div>
+      <div class="pillar reveal"><div class="pnum">05</div><h3>Skor Kesehatan</h3><p>Satu angka gabungan dari empat hal di atas, supaya kamu tahu posisi keuanganmu tanpa perlu jadi ahli.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="langkah" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Cara kerja</p>
+      <h2>4 langkah aman mengelola keuangan bersama SafeYourStep.</h2>
+    </div>
+    <div class="process">
+      <div class="p-row reveal">
+        <div class="pn">01</div>
+        <div><h3>Kenali kondisi keuanganmu</h3><p>Mulai dari jujur soal angka: berapa pendapatan, pengeluaran, dan utang yang kamu punya sekarang. Tidak perlu sempurna, cukup mulai dicatat.</p></div>
+      </div>
+      <div class="p-row reveal">
+        <div class="pn">02</div>
+        <div><h3>Atur & pantau dengan Smart Financial Dashboard</h3><p>Masukkan data bulananmu ke worksheet, dan dashboard otomatis menghitung arus kas, rasio utang, dana darurat, alokasi anggaran, sampai skor kesehatan keuanganmu.</p></div>
+      </div>
+      <div class="p-row reveal">
+        <div class="pn">03</div>
+        <div><h3>Tanya cepat lewat WA Bot</h3><p>Butuh hitung cepat atau pengingat bayar tagihan? Chat WA Bot SafeYourStep kapan saja tanpa perlu buka aplikasi lain.</p></div>
+      </div>
+      <div class="p-row reveal">
+        <div class="pn">04</div>
+        <div><h3>Belajar bareng di Channel WA</h3><p>Dapatkan pembahasan keuangan singkat, studi kasus, dan pengingat rutin lewat Channel WA — tanpa perlu grup ramai.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="produk">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Produk SafeYourStep</p>
+      <h2>Tiga cara kami bantu kamu bertindak, bukan cuma tahu.</h2>
+    </div>
+    <div class="products">
+      <div class="product-card featured reveal">
+        <span class="badge">Produk utama</span>
+        <div class="p-icon">📊</div>
+        <h3>Smart Financial Dashboard</h3>
+        <p class="desc">Worksheet Excel interaktif yang menghitung kondisi keuanganmu otomatis — tinggal isi data bulanan, dashboard yang bekerja.</p>
+        <ul class="feat-list">
+          <li>Arus kas, rasio utang, dana darurat, alokasi anggaran, skor kesehatan</li>
+          <li>Pilih bulan lewat dropdown, seluruh dashboard ikut berubah</li>
+          <li>Target & bobot skor bisa disesuaikan sendiri</li>
+        </ul>
+        <a class="btn btn-primary" href="#" style="justify-content:center;">Dapatkan Worksheet-nya</a>
+      </div>
+      <div class="product-card reveal">
+        <div class="p-icon">💬</div>
+        <h3>WA Bot SafeYourStep</h3>
+        <p class="desc">Asisten keuangan pribadi lewat WhatsApp — siap bantu hitung cepat dan mengingatkanmu tetap disiplin.</p>
+        <ul class="feat-list">
+          <li>Pengingat catat pengeluaran & bayar cicilan</li>
+          <li>Hitung cepat rasio utang & dana darurat</li>
+          <li>Bisa diajak tanya jawab dasar soal keuangan</li>
+        </ul>
+        <a class="btn btn-outline" href="https://wa.me/62XXXXXXXXXX" style="justify-content:center;">Chat WA Bot →</a>
+      </div>
+      <div class="product-card reveal">
+        <div class="p-icon">📣</div>
+        <h3>Channel WA SafeYourStep</h3>
+        <p class="desc">Broadcast satu arah berisi tips, studi kasus, dan pengingat keuangan — ringan, tanpa notifikasi berlebihan.</p>
+        <ul class="feat-list">
+          <li>Bahasan singkat, mudah dipahami</li>
+          <li>Update rutin, tidak spam</li>
+          <li>Gratis untuk diikuti siapa saja</li>
+        </ul>
+        <a class="btn btn-outline" href="https://whatsapp.com/channel/XXXXXXXXXXXXXXXXXXXX" style="justify-content:center;">Gabung Channel →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--parchment);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Sekilas produk</p>
+      <h2>Begini tampilan Smart Financial Dashboard-mu nanti.</h2>
+      <p>Contoh tampilan untuk data bulan terpilih. Semua nilai di bawah ini otomatis, tidak perlu dihitung manual.</p>
+    </div>
+    <div class="dash-preview reveal">
+      <p class="eyebrow" style="color:var(--brass);">Bulan: Desember</p>
+      <div class="dash-grid">
+        <div class="dash-card"><div class="dlabel">ARUS KAS BERSIH</div><div class="dval">Rp5.6jt</div><div class="dsub">✅ Surplus</div></div>
+        <div class="dash-card"><div class="dlabel">RASIO UTANG</div><div class="dval">9.4%</div><div class="dsub">✅ Sehat</div></div>
+        <div class="dash-card"><div class="dlabel">DANA DARURAT</div><div class="dval">3.0 bln</div><div class="dsub">⚠️ Kurang</div></div>
+        <div class="dash-card"><div class="dlabel">TINGKAT TABUNGAN</div><div class="dval">7.1%</div><div class="dsub">⚠️ Rendah</div></div>
+        <div class="dash-card"><div class="dlabel">SKOR KESEHATAN</div><div class="dval">65/100</div><div class="dsub">Sehat</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--paper);border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Untuk siapa</p>
+      <h2>SafeYourStep dibuat untuk kamu yang mulai serius soal keuangan.</h2>
+    </div>
+    <div class="personas">
+      <div class="persona reveal"><h3>Baru mulai kerja</h3><p>Ingin membiasakan diri mencatat dan mengatur gaji pertama tanpa ribet pakai aplikasi rumit.</p></div>
+      <div class="persona reveal"><h3>Sedang melunasi utang/cicilan</h3><p>Butuh gambaran jelas seberapa berat beban cicilan terhadap pendapatan bulanan.</p></div>
+      <div class="persona reveal"><h3>Mau membangun dana darurat</h3><p>Ingin tahu persis sudah berapa bulan pengeluaran yang ter-cover, dan berapa lagi target ke depan.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="komunitas">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <div>
+        <h2>Mulai langkah pertamamu hari ini.</h2>
+        <p>Gabung Channel WA untuk update rutin, atau langsung chat WA Bot untuk bantuan cepat soal keuanganmu.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn" style="background:var(--ink);color:var(--paper);" href="https://whatsapp.com/channel/XXXXXXXXXXXXXXXXXXXX">Gabung Channel WA</a>
+        <a class="btn" style="background:var(--paper);color:var(--ink);" href="https://wa.me/62XXXXXXXXXX">Chat WA Bot</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="color:var(--paper);"><span class="dot"></span>SafeYourStep</div>
+        <p style="font-size:14px;margin-top:14px;max-width:280px;color:#9FB3A9;">Platform edukasi dan alat bantu keuangan pribadi untuk siapa saja yang ingin mengambil langkah lebih aman.</p>
+      </div>
+      <div>
+        <h4>Jelajahi</h4>
+        <ul>
+          <li><a href="#pilar">Pengenalan</a></li>
+          <li><a href="#langkah">Cara Kerja</a></li>
+          <li><a href="#produk">Produk</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Produk</h4>
+        <ul>
+          <li><a href="#produk">Smart Financial Dashboard</a></li>
+          <li><a href="https://wa.me/62XXXXXXXXXX">WA Bot</a></li>
+          <li><a href="https://whatsapp.com/channel/XXXXXXXXXXXXXXXXXXXX">Channel WA</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontak</h4>
+        <ul>
+          <li>hello@safeyourstep.id</li>
+          <li>WA: +62 XXX-XXXX-XXXX</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SafeYourStep. Semua hak dilindungi.</span>
+      <span>Dibuat untuk membantu, bukan menakut-nakuti.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); } });
+  },{threshold:0.15});
+  document.querySelectorAll('.reveal, .step').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
