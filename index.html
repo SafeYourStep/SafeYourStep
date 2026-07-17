@@ -6,6 +6,14 @@
 <title>SafeYourStep — Ngatur Duit Tanpa Drama</title>
 <meta name="description" content="SafeYourStep bantu kamu ngatur duit lewat Smart Financial Dashboard, WA Bot, dan Channel WA. Gak ribet, gak bikin insecure.">
 <meta name="theme-color" content="#5B1A2E">
+
+<!-- Open Graph / pratinjau saat link dibagikan ke WhatsApp, Instagram, dll -->
+<meta property="og:title" content="SafeYourStep — Ngatur Duit Tanpa Drama">
+<meta property="og:description" content="Smart Financial Dashboard, WA Bot, dan Channel WA yang bantu kamu ngatur duit tanpa bikin insecure.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary">
+
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%235B1A2E'/%3E%3Ccircle cx='50' cy='50' r='22' fill='%23F2C14E'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,6 +57,7 @@
   }
   .btn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0px var(--ink);}
   .btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0px var(--ink);}
+  .btn:focus-visible{outline:3px solid var(--maroon);outline-offset:2px;}
   .btn-coral{background:var(--coral);color:var(--white);}
   .btn-maroon{background:var(--maroon);color:var(--white);}
   .btn-mustard{background:var(--mustard);color:var(--ink);}
@@ -144,18 +153,28 @@
   /* PRODUK CARDS - scallop besar dgn badge sticker */
   .polaroid-row{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;padding:16px 0 40px;}
   @media(max-width:900px){.polaroid-row{grid-template-columns:1fr;max-width:360px;margin:0 auto;}}
-  .polaroid{background:var(--white);border:2.5px solid var(--ink);border-radius:8px;padding:16px 16px 22px;box-shadow:var(--shadow);position:relative;}
+  .polaroid{background:var(--white);border:2.5px solid var(--ink);border-radius:8px;padding:16px 16px 22px;box-shadow:var(--shadow);position:relative;display:flex;flex-direction:column;}
+  .polaroid.featured{border-width:3px;box-shadow:7px 7px 0px var(--ink);}
   .polaroid-photo{height:140px;border:2px solid var(--ink);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:52px;}
-  .polaroid-caption{padding-top:14px;}
+  .polaroid-caption{padding-top:14px;display:flex;flex-direction:column;flex:1;}
   .polaroid-title{font-family:'Fraunces',serif;font-weight:700;font-size:19px;line-height:1.15;}
   .polaroid-caption p{font-size:13.5px;font-weight:500;margin-top:8px;}
   .badge-corner{
     position:absolute;top:-18px;right:-14px;transform:rotate(10deg);
   }
+  .featured-flag{
+    position:absolute;top:14px;left:-10px;background:var(--mustard);color:var(--ink);
+    font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;
+    padding:5px 12px;border:2px solid var(--ink);border-radius:999px;box-shadow:var(--shadow-sm);
+    transform:rotate(-6deg);
+  }
+  .feat-list{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:7px;flex:1;}
+  .feat-list li{font-size:13px;font-weight:600;padding-left:20px;position:relative;}
+  .feat-list li::before{content:"✓";position:absolute;left:0;top:0;color:var(--coral);font-weight:800;}
 
   /* DASHBOARD PREVIEW - dark card style */
   .darkcard{
-    background:var(--cream);border-radius:20px;padding:28px;max-width:640px;margin:0 auto;
+    background:var(--cream);border-radius:20px;padding:28px;max-width:700px;margin:0 auto;
     border:2.5px solid var(--ink);box-shadow:8px 8px 0 rgba(0,0,0,.25);
   }
   .kpi-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap;}
@@ -178,6 +197,13 @@
   .testi-arrow{width:44px;height:44px;border:2.5px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--white);}
 
   footer a:hover{text-decoration:underline;}
+
+  /* REVEAL ON SCROLL */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.on{opacity:1;transform:translateY(0);}
+  @media(prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+  }
 </style>
 </head>
 <body>
@@ -242,33 +268,38 @@
 
 <section id="kenalan" style="background:var(--maroon);color:var(--white);padding-top:70px;">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="ribbon" style="background:var(--pink);color:var(--ink);">📌 real talk</span>
       <h2 style="color:var(--white);margin-top:18px;">5 hal yang nentuin sehat<br>nggaknya keuanganmu.</h2>
       <p style="color:#EBD9DF;">Sebelum ngomongin investasi atau nabung buat liburan, cek dulu 5 hal dasar ini. Ini juga yang otomatis dihitungin di Smart Financial Dashboard kita.</p>
     </div>
     <div class="pillar-grid">
-      <div class="pillar-card" style="background:var(--pink);transform:rotate(-1.5deg);">
+      <div class="pillar-card reveal" style="background:var(--pink);transform:rotate(-1.5deg);">
         <div class="pillar-emoji">💵</div>
         <div class="pillar-title">Arus Kas</div>
         <div class="pillar-desc">Duit masuk vs keluar tiap bulan. Sering minus? Nah, ini biang keroknya.</div>
       </div>
-      <div class="pillar-card" style="background:var(--mustard);transform:rotate(1.5deg);">
+      <div class="pillar-card reveal" style="background:var(--mustard);transform:rotate(1.5deg);">
         <div class="pillar-emoji">💳</div>
         <div class="pillar-title">Rasio Utang</div>
         <div class="pillar-desc">Cicilan dibanding gaji. Lewat 36%? Red flag, arus kasmu bakal kecekik.</div>
       </div>
-      <div class="pillar-card" style="background:var(--sky);transform:rotate(-1deg);">
+      <div class="pillar-card reveal" style="background:var(--sky);transform:rotate(-1deg);">
         <div class="pillar-emoji">🛟</div>
         <div class="pillar-title">Dana Darurat</div>
         <div class="pillar-desc">Kalau gajian tiba-tiba berhenti, tabunganmu nutup hidup berapa lama?</div>
       </div>
-      <div class="pillar-card" style="background:var(--sage);transform:rotate(1deg);">
+      <div class="pillar-card reveal" style="background:var(--sage);transform:rotate(1deg);">
         <div class="pillar-emoji">🧾</div>
         <div class="pillar-title">Alokasi Anggaran</div>
         <div class="pillar-desc">Ke mana aja duitmu pergi beneran — bukan feeling, tapi angka asli.</div>
       </div>
-      <div class="pillar-card" style="background:var(--coral);color:var(--white);transform:rotate(-1.5deg);">
+      <div class="pillar-card reveal" style="background:var(--white);transform:rotate(-1deg);">
+        <div class="pillar-emoji">🏦</div>
+        <div class="pillar-title">Tingkat Tabungan</div>
+        <div class="pillar-desc">Berapa persen gajimu yang beneran nyisa buat masa depan, bukan cuma lewat doang.</div>
+      </div>
+      <div class="pillar-card reveal" style="background:var(--coral);color:var(--white);transform:rotate(-1.5deg);">
         <div class="pillar-emoji">🏆</div>
         <div class="pillar-title">Skor Kesehatan</div>
         <div class="pillar-desc">1 angka gabungan dari semuanya. Biar kamu gak perlu jadi ahli keuangan buat paham posisimu.</div>
@@ -279,27 +310,27 @@
 
 <section id="caranya" class="dotbg">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="ribbon" style="background:var(--sky);">🎯 caranya</span>
       <h2 style="margin-top:18px;">Cara kerjanya, beneran<br>gampang kok.</h2>
     </div>
     <div class="steps-row">
-      <div class="step-card">
+      <div class="step-card reveal">
         <div class="step-num" style="background:var(--pink);">01</div>
         <h3>Kenalan sama dompetmu</h3>
         <p>Jujur-jujuran soal angka: gaji, pengeluaran, utang. Gak perlu sempurna, yang penting mulai dicatat.</p>
       </div>
-      <div class="step-card">
+      <div class="step-card reveal">
         <div class="step-num" style="background:var(--mustard);">02</div>
         <h3>Pantau lewat dashboard</h3>
         <p>Isi data bulananmu, dashboard-nya yang ngitung otomatis: arus kas, utang, dana darurat, sampai skor kesehatan.</p>
       </div>
-      <div class="step-card">
+      <div class="step-card reveal">
         <div class="step-num" style="background:var(--sky);">03</div>
         <h3>Curhat ke WA Bot</h3>
         <p>Bingung mau beli sesuatu? Tinggal chat, bot-nya bantu hitung dampaknya ke budgetmu.</p>
       </div>
-      <div class="step-card">
+      <div class="step-card reveal">
         <div class="step-num" style="background:var(--sage);">04</div>
         <h3>Gas bareng Channel WA</h3>
         <p>Tips singkat, studi kasus receh, reminder rutin — tanpa notif berisik, tanpa grup rame.</p>
@@ -310,36 +341,52 @@
 
 <section id="produk" style="background:var(--pink);">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="ribbon" style="background:var(--white);">🛍️ produk kita</span>
       <h2 style="margin-top:18px;">3 cara kita bantu kamu<br>gerak, bukan cuma tau.</h2>
     </div>
     <div class="polaroid-row">
-      <div class="polaroid" style="transform:rotate(-2.5deg);">
+      <div class="polaroid featured reveal" style="transform:rotate(-2.5deg);">
+        <span class="featured-flag">⭐ produk utama</span>
         <div class="badge-corner"><div class="stamp" style="background:var(--mustard);">📊</div></div>
         <div class="polaroid-photo" style="background:var(--sky);">📈</div>
         <div class="polaroid-caption">
           <div class="polaroid-title">Smart Financial<br>Dashboard</div>
           <p>Worksheet Excel yang ngitung semuanya otomatis. Isi data, langsung keliatan sehat apa nggaknya keuanganmu.</p>
-          <a class="btn btn-maroon" style="width:100%;justify-content:center;margin-top:10px;" href="https://1drv.ms/x/c/c0db7c51366b00f6/IQCywKZJU7ZKTb83opfANkcwAdFYYJzMWRx_iPrf2wi0dcU?e=Ni72TS" target="_blank" rel="noopener">Ambil Worksheet-nya</a>
+          <ul class="feat-list">
+            <li>Arus kas, utang, dana darurat, tabungan, skor kesehatan</li>
+            <li>Tinggal pilih bulan, seluruh dashboard ikut ke-update</li>
+            <li>Target & bobot skor bisa diatur sesuai kebutuhanmu</li>
+          </ul>
+          <a class="btn btn-maroon" style="width:100%;justify-content:center;margin-top:14px;" href="https://1drv.ms/x/c/c0db7c51366b00f6/IQCywKZJU7ZKTb83opfANkcwAdFYYJzMWRx_iPrf2wi0dcU?e=Ni72TS" target="_blank" rel="noopener">Ambil Worksheet-nya</a>
         </div>
       </div>
-      <div class="polaroid" style="transform:rotate(2deg);">
+      <div class="polaroid reveal" style="transform:rotate(2deg);">
         <div class="badge-corner"><div class="stamp" style="background:var(--sage);">💬</div></div>
         <div class="polaroid-photo" style="background:var(--coral);">💬</div>
         <div class="polaroid-caption">
           <div class="polaroid-title">WA Bot<br>SafeYourStep</div>
           <p>Asisten keuangan pribadi di WhatsApp. Bisa diajak curhat mau beli apa, ngingetin budget harian juga.</p>
-          <a class="btn btn-maroon" style="width:100%;justify-content:center;margin-top:10px;" href="https://wa.me/6281331906802" target="_blank" rel="noopener">Chat Sekarang</a>
+          <ul class="feat-list">
+            <li>Pengingat catat pengeluaran & bayar cicilan</li>
+            <li>Hitung cepat dampak belanja ke budgetmu</li>
+            <li>Bisa diajak tanya jawab dasar soal keuangan</li>
+          </ul>
+          <a class="btn btn-maroon" style="width:100%;justify-content:center;margin-top:14px;" href="https://wa.me/6281331906802" target="_blank" rel="noopener">Chat Sekarang</a>
         </div>
       </div>
-      <div class="polaroid" style="transform:rotate(-1.5deg);">
+      <div class="polaroid reveal" style="transform:rotate(-1.5deg);">
         <div class="badge-corner"><div class="stamp" style="background:var(--sky);">📣</div></div>
         <div class="polaroid-photo" style="background:var(--mustard);">📣</div>
         <div class="polaroid-caption">
           <div class="polaroid-title">Channel WA<br>SafeYourStep</div>
           <p>Broadcast santai — tips, studi kasus, reminder. Gratis, gak spam, gak maksa.</p>
-          <a class="btn btn-maroon" style="width:100%;justify-content:center;margin-top:10px;" href="https://whatsapp.com/channel/0029VbDEJ7y05MUoMiRb9t3A" target="_blank" rel="noopener">Gabung Channel</a>
+          <ul class="feat-list">
+            <li>Bahasan singkat, gampang dicerna</li>
+            <li>Update rutin, bukan spam harian</li>
+            <li>Gratis buat siapa aja yang mau ikutan</li>
+          </ul>
+          <a class="btn btn-maroon" style="width:100%;justify-content:center;margin-top:14px;" href="https://whatsapp.com/channel/0029VbDEJ7y05MUoMiRb9t3A" target="_blank" rel="noopener">Gabung Channel</a>
         </div>
       </div>
     </div>
@@ -349,19 +396,20 @@
 <div class="scallop-strip" style="--_c:var(--maroon);"></div>
 <section style="background:var(--maroon);color:var(--white);padding-top:64px;">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="ribbon" style="background:var(--mustard);">👀 sneak peek</span>
       <h2 style="color:var(--white);margin-top:18px;">Beginilah tampilan dashboard-mu nanti.</h2>
       <p style="color:#EBD9DF;">Preview buat bulan ini — semua angka di bawah keitung otomatis, gak perlu kalkulator manual.</p>
     </div>
-    <div class="darkcard">
+    <div class="darkcard reveal">
       <div class="mono" style="font-size:12px;color:var(--coral);font-weight:700;">BULAN: DESEMBER</div>
       <div class="kpi-row">
         <div class="kpi-pill" style="background:var(--pink);"><div class="kpi-label">Arus Kas</div><div class="kpi-val">Rp5.6jt</div><div class="kpi-sub">✅ surplus</div></div>
         <div class="kpi-pill" style="background:var(--sky);"><div class="kpi-label">Utang</div><div class="kpi-val">9.4%</div><div class="kpi-sub">✅ sehat</div></div>
+        <div class="kpi-pill" style="background:var(--mustard);"><div class="kpi-label">Darurat</div><div class="kpi-val">3.0 bln</div><div class="kpi-sub">⚠️ kurang</div></div>
       </div>
       <div class="kpi-row">
-        <div class="kpi-pill" style="background:var(--mustard);"><div class="kpi-label">Darurat</div><div class="kpi-val">3.0 bln</div><div class="kpi-sub">⚠️ kurang</div></div>
+        <div class="kpi-pill" style="background:var(--coral);color:var(--white);"><div class="kpi-label">Tabungan</div><div class="kpi-val">7.1%</div><div class="kpi-sub">⚠️ rendah</div></div>
         <div class="kpi-pill" style="background:var(--sage);color:var(--white);"><div class="kpi-label">Skor</div><div class="kpi-val">65/100</div><div class="kpi-sub">🙂 sehat</div></div>
       </div>
     </div>
@@ -371,22 +419,22 @@
 
 <section style="background:var(--white);">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="ribbon" style="background:var(--sage);color:var(--white);">🫶 buat siapa</span>
       <h2 style="margin-top:18px;">SafeYourStep tuh buat kamu yang...</h2>
     </div>
     <div class="note-row">
-      <div class="sticky-note" style="background:var(--mustard);transform:rotate(-2deg);">
+      <div class="sticky-note reveal" style="background:var(--mustard);transform:rotate(-2deg);">
         <div class="pin">📌</div>
         <p class="hand">baru gajian pertama</p>
         <p>pengen biasain nyatet dari awal, tanpa ribet pake app yang rumit-rumit.</p>
       </div>
-      <div class="sticky-note" style="background:var(--sky);transform:rotate(2deg);">
+      <div class="sticky-note reveal" style="background:var(--sky);transform:rotate(2deg);">
         <div class="pin">📌</div>
         <p class="hand">lagi nyicil sesuatu</p>
         <p>butuh tau seberapa berat cicilanmu dibanding gaji, biar gak asal jalan.</p>
       </div>
-      <div class="sticky-note" style="background:var(--pink);transform:rotate(-1deg);">
+      <div class="sticky-note reveal" style="background:var(--pink);transform:rotate(-1deg);">
         <div class="pin">📌</div>
         <p class="hand">mau punya dana darurat</p>
         <p>pengen tau persis udah nutup berapa bulan, target berapa bulan lagi.</p>
@@ -400,7 +448,7 @@
     <div class="sticker" style="top:16px;left:6%;font-size:30px;transform:rotate(-10deg);">🎉</div>
     <div class="sticker" style="top:40px;right:8%;font-size:26px;transform:rotate(10deg);">💌</div>
     <span class="ribbon" style="background:var(--white);color:var(--ink);">💬 katanya gimana</span>
-    <p class="testi-quote" style="margin-top:28px;color:var(--white);">"Awalnya kirain bakal ribet kayak app keuangan lain. Ternyata tinggal chat doang, langsung ngerti duitku kemana aja."</p>
+    <p class="testi-quote reveal" style="margin-top:28px;color:var(--white);">"Awalnya kirain bakal ribet kayak app keuangan lain. Ternyata tinggal chat doang, langsung ngerti duitku kemana aja."</p>
     <p style="margin-top:16px;font-weight:700;">— pengguna SafeYourStep</p>
     <div style="display:flex;justify-content:center;gap:16px;margin-top:26px;">
       <div class="testi-arrow">←</div>
@@ -412,7 +460,7 @@
 <div class="scallop-strip" style="--_c:var(--sage);"></div>
 <section id="komunitas" style="background:var(--sage);color:var(--white);text-align:center;">
   <div class="wrap">
-    <h2 style="color:var(--white);font-size:clamp(28px,4vw,44px);">Gas mulai langkah pertamamu<br>hari ini. Gratis kok.</h2>
+    <h2 class="reveal" style="color:var(--white);font-size:clamp(28px,4vw,44px);">Gas mulai langkah pertamamu<br>hari ini. Gratis kok.</h2>
     <p style="margin-top:16px;font-size:17px;color:#F1F7EF;">Gabung channel buat update rutin, atau langsung chat bot-nya kalau lagi bingung soal duit.</p>
     <div style="display:flex;gap:16px;justify-content:center;margin-top:32px;flex-wrap:wrap;">
       <a class="btn btn-mustard" href="https://whatsapp.com/channel/0029VbDEJ7y05MUoMiRb9t3A" target="_blank" rel="noopener">Gabung Channel WA</a>
@@ -444,6 +492,12 @@
             <a href="https://whatsapp.com/channel/0029VbDEJ7y05MUoMiRb9t3A" target="_blank" rel="noopener">Channel WA</a>
           </div>
         </div>
+        <div>
+          <div style="color:var(--white);font-weight:700;margin-bottom:12px;">Kontak</div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;">
+            <a href="mailto:safeyourstep@gmail.com">safeyourstep@gmail.com</a>
+          </div>
+        </div>
       </div>
     </div>
     <div style="border-top:1px solid #45323A;margin-top:40px;padding-top:20px;font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
@@ -463,6 +517,11 @@
   mobileMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => mobileMenu.classList.remove('open'));
   });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
